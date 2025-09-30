@@ -1,0 +1,49 @@
+# Python 編譯檔案
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 虛擬環境
+.venv/
+venv/
+env/
+
+# VSCode / PyCharm 設定
+.vscode/
+.idea/
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# 測試/覆蓋率檔案
+*.cover
+*.log
+coverage/
+htmlcov/
+.pytest_cache/
+
+# Flask / SQLite DB
+instance/
+*.db
+*.sqlite3
+
+# 上傳暫存檔
+uploads/
+tmp/
+*.bak
+
+# 文件輸出
+*.docx
+*.pdf
+
+# API key / 設定檔
+config.ini
+
+# Pipenv / Poetry
+Pipfile.lock
+poetry.lock
+
+# Jupyter Notebook
+.ipynb_checkpoints
