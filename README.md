@@ -39,10 +39,10 @@ python app.py
 3. 上傳照片、輸入活動內容 &rarr; 點選「產生學習歷程」
 4. 自動下載生成的 Word 報告
 ## 作者（依姓氏筆劃排序）
-- 宋宣錕
-- 張睿玹
-- 陳欣妤
-- 蔡淳宇
+- 宋宣錕（[白狐不白](https://github.com/baihu-fox-8588)）
+- 張睿玹（[ZickeyChang](https://github.com/ZickeyChang)）
+- 陳欣妤（[HsinnnP](https://github.com/chyiwy54)）
+- 蔡淳宇（[淳](https://github.com/Chuen666666)）
 ## 法律聲明
 - 本專案使用之 **Google Gemini API** 需依照 Google 官方服務條款使用，請自行確認金鑰申請與使用規範
 - 產生的內容僅供參考，作者對其正確性與完整性不負任何保證
