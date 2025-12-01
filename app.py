@@ -1,21 +1,25 @@
 import base64
-import configparser
 import mimetypes
 from io import BytesIO
+import os
 
 import requests
+from dotenv import load_dotenv
 from docx import Document
 from docx.shared import Inches
 from flask import Flask, render_template, request, send_file
 
+load_dotenv()
+API_KEY = os.getenv('API_KEY')
+
+if not API_KEY:
+    raise RuntimeError('找不到 API_KEY，請確認 .env 已正確設定')
+
 app = Flask(__name__)
 
-config = configparser.ConfigParser()
-config.read('config.ini', encoding='utf-8')
-GEMINI_API_KEY = config['Gemini']['API_KEY'].strip()
 GEMINI_ENDPOINT = (
     'https://generativelanguage.googleapis.com/v1/models/'
-    f'gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}'
+    f'gemini-1.5-flash:generateContent?key={API_KEY}'
 )
 
 PROMPT_TEMPLATE = '''請使用繁體中文，根據以下活動資訊，撰寫以下七個段落，請加上標題：

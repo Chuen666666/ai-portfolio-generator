@@ -39,7 +39,7 @@ tmp/
 *.pdf
 
 # API key / 設定檔
-config.ini
+token.env
 
 # Pipenv / Poetry
 Pipfile.lock
