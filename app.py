@@ -1,15 +1,18 @@
 import base64
 import mimetypes
-from io import BytesIO
 import os
+from io import BytesIO
+from pathlib import Path
 
-import requests
 from dotenv import load_dotenv
 from docx import Document
 from docx.shared import Inches
 from flask import Flask, render_template, request, send_file
+import requests
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent
+
+load_dotenv(BASE_DIR / 'token.env')
 API_KEY = os.getenv('API_KEY')
 
 if not API_KEY:
