@@ -25,8 +25,7 @@
 2. 使用以下指令安裝依賴
 
 ```bash
-git clone https://github.com/Chuen666666/ai-portfolio-generator.git
-cd ai-portfolio-generator
+pip install -r requirements.txt
 ```
 
 ### 設定 API Key
