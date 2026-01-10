@@ -30,8 +30,13 @@ pip install -r requirements.txt
 
 ### 設定 API Key
 1. 到 [Google Dev](https://ai.google.dev/) 取得 Gemini API
-2. 將檔案 `token.example.env` 改名為 `token.env`
-3. 將 API 填入 `token.env` 中的 `API_KEY` 欄位
+2. 從範例檔建立必要檔案
+
+```bash
+cp token.example.env token.env
+```
+
+3. 打開 `token.env`，將 API 填入 `token.env` 中的 `API_KEY` 欄位
 
 ## 使用方式
 1. 啟動伺服器
