@@ -22,27 +22,24 @@
 ### 依賴
 1. 請先把本專案 clone 下來後，建立一個 Venv
 2. 使用以下指令安裝依賴
-
-```bash
-pip install -r requirements.txt
-```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ### 設定 API Key
 1. 到 [Google Dev](https://ai.google.dev/) 取得 Gemini API
 2. 從範例檔建立必要檔案
-
-```bash
-cp token.example.env token.env
-```
+  ```bash
+  cp token.example.env token.env
+  ```
 
 3. 打開 `token.env`，將 API 填入 `token.env` 中的 `API_KEY` 欄位
 
 ## 使用方式
 1. 啟動伺服器
-
-```bash
-python app.py
-```
+  ```bash
+  python app.py
+  ```
 
 2. 開啟瀏覽器並前往 http://127.0.0.1:5000
 3. 上傳照片、輸入活動內容 &rarr; 點選「產生學習歷程」
