@@ -1,6 +1,7 @@
 import base64
 import mimetypes
 import os
+from contextlib import suppress
 from io import BytesIO
 from pathlib import Path
 
@@ -113,12 +114,9 @@ def index():
 
         doc.add_page_break()
         doc.add_heading('活動照片', level=1)
-
         for img in image_files:
-            try:
+            with suppress(Exception):
                 img.seek(0)
-            except Exception:
-                pass
             if getattr(img, 'filename', ''):
                 try:
                     doc.add_picture(img.stream, width=Inches(4))
