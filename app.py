@@ -4,11 +4,12 @@ import os
 from io import BytesIO
 from pathlib import Path
 
-from dotenv import load_dotenv
+import requests
 from docx import Document
 from docx.shared import Inches
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, send_file
-import requests
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -25,26 +26,27 @@ GEMINI_ENDPOINT = (
     f'gemini-1.5-flash:generateContent?key={API_KEY}'
 )
 
-PROMPT_TEMPLATE = '''請使用繁體中文，根據以下活動資訊，撰寫以下七個段落，請加上標題：
+PROMPT_TEMPLATE = """請使用繁體中文，根據以下活動資訊，撰寫以下七個段落，請加上標題：
 
-一、 主題說明  
-二、 心得反思  
-三、學習歷程檔案內容簡介（100 字內）  
-四、檢討或反思  
-五、學習或執行過程（步驟、結果）  
-六、對未來的影響  
-七、學習成果佐證說明  
+一、 主題說明
+二、 心得反思
+三、學習歷程檔案內容簡介（100 字內）
+四、檢討或反思
+五、學習或執行過程（步驟、結果）
+六、對未來的影響
+七、學習成果佐證說明
 
 活動資訊如下：
 {user_input}
-'''
+"""
+
 
 def call_gemini_api(first_image_bytes, user_input, image_filename=None, timeout=60):
-    '''
+    """
     與 Gemini 溝通：
     - 若有圖片：會連同第一張圖片與文字一起送出
     - 若無圖片：只送文字
-    '''
+    """
     parts = []
 
     if first_image_bytes:
@@ -54,12 +56,7 @@ def call_gemini_api(first_image_bytes, user_input, image_filename=None, timeout=
             if guess:
                 mime = guess
         image_base64 = base64.b64encode(first_image_bytes).decode('utf-8')
-        parts.append({
-            'inlineData': {
-                'mimeType': mime,
-                'data': image_base64
-            }
-        })
+        parts.append({'inlineData': {'mimeType': mime, 'data': image_base64}})
 
     parts.append({'text': PROMPT_TEMPLATE.format(user_input=user_input)})
 
@@ -67,7 +64,9 @@ def call_gemini_api(first_image_bytes, user_input, image_filename=None, timeout=
     headers = {'Content-Type': 'application/json'}
 
     try:
-        resp = requests.post(GEMINI_ENDPOINT, json=payload, headers=headers, timeout=timeout)
+        resp = requests.post(
+            GEMINI_ENDPOINT, json=payload, headers=headers, timeout=timeout
+        )
     except requests.RequestException as e:
         return f'[錯誤] 連線至 Gemini 失敗：{e}'
 
@@ -94,7 +93,9 @@ def index():
             first_image_bytes = image_files[0].read()
             first_image_name = image_files[0].filename
 
-        result_text = call_gemini_api(first_image_bytes, user_input, image_filename=first_image_name)
+        result_text = call_gemini_api(
+            first_image_bytes, user_input, image_filename=first_image_name
+        )
 
         doc = Document()
         doc.add_heading('學習歷程紀錄', 0)
@@ -120,7 +121,7 @@ def index():
                 pass
             if getattr(img, 'filename', ''):
                 try:
-                    doc.add_picture(img, width=Inches(4))
+                    doc.add_picture(img.stream, width=Inches(4))
                     doc.add_paragraph('')
                 except Exception as e:
                     doc.add_paragraph(f'[提醒] 無法插入圖片 {img.filename}：{e}')
