@@ -78,7 +78,7 @@ def call_gemini_api(first_image_bytes, user_input, image_filename=None, timeout=
     try:
         text = result['candidates'][0]['content']['parts'][0]['text']
         return text
-    except (KeyError, IndexError):
+    except KeyError, IndexError:
         return '[錯誤] Gemini 回傳內容解析失敗：\n' + str(result)
 
 
