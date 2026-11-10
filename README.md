@@ -20,7 +20,7 @@
 
 ### 基礎環境
 
-- Python（3.9~3.11）
+- Python 3.14
 - （可選）Ruff
 
 ### 依賴
@@ -29,8 +29,10 @@
 2. 使用以下指令安裝依賴
 
   ```bash
-  pip install -r requirements.txt
+  pip install --require-hashes -r requirements.txt
   ```
+
+  維護者需要 Ruff、pre-commit 與 lockfile 工具時，改安裝 `requirements-dev.txt`。
 
 ### 設定 API Key
 
