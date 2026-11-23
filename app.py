@@ -22,10 +22,7 @@ if not API_KEY:
 
 app = Flask(__name__)
 
-GEMINI_ENDPOINT = (
-    'https://generativelanguage.googleapis.com/v1/models/'
-    f'gemini-1.5-flash:generateContent?key={API_KEY}'
-)
+GEMINI_ENDPOINT = f'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={API_KEY}'
 
 PROMPT_TEMPLATE = """請使用繁體中文，根據以下活動資訊，撰寫以下七個段落，請加上標題：
 
@@ -65,9 +62,7 @@ def call_gemini_api(first_image_bytes, user_input, image_filename=None, timeout=
     headers = {'Content-Type': 'application/json'}
 
     try:
-        resp = requests.post(
-            GEMINI_ENDPOINT, json=payload, headers=headers, timeout=timeout
-        )
+        resp = requests.post(GEMINI_ENDPOINT, json=payload, headers=headers, timeout=timeout)
     except requests.RequestException as e:
         return f'[錯誤] 連線至 Gemini 失敗：{e}'
 
@@ -94,9 +89,7 @@ def index():
             first_image_bytes = image_files[0].read()
             first_image_name = image_files[0].filename
 
-        result_text = call_gemini_api(
-            first_image_bytes, user_input, image_filename=first_image_name
-        )
+        result_text = call_gemini_api(first_image_bytes, user_input, image_filename=first_image_name)
 
         doc = Document()
         doc.add_heading('學習歷程紀錄', 0)
